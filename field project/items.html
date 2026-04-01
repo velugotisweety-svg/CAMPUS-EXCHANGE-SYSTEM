@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Items | Campus Exchange</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ITEMS GRID (page specific only) */
+    .items-section {
+      padding: 60px;
+    }
+
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .item-card {
+      background: #0f1411;
+      border: 1px solid #1c1c1c;
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .item-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 20px rgba(0,255,102,0.3);
+    }
+
+  .item-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #111;
+}
+
+
+    .item-card h3 {
+      color: #00ff66;
+      margin: 10px 0 5px;
+      font-size: 16px;
+    }
+
+    .item-card p {
+      font-size: 14px;
+      color: #bfbfbf;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <span class="white">CAMPUS</span>
+      <span class="green">EXCHANGE</span>
+    </a>
+
+    <nav>
+      <a href="categories.html">Categories</a>
+      
+
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <!-- ITEMS SECTION -->
+  <section class="items-section">
+    <h1 style="text-align:center;">
+      AVAILABLE <span class="green">ITEMS</span>
+    </h1>
+
+    <div class="items-grid" id="grid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Campus Exchange. All rights reserved.</p>
+  </footer>
+
+  <!-- DATA -->
+<script src="data.js"></script>
+
+  <script>
+    const grid = document.getElementById("grid");
+
+    items.forEach(item => {
+      grid.innerHTML += `
+        <div class="item-card" onclick="openItem(${item.id})">
+          <img src="${item.image}" 
+          <h3>${item.name}</h3>
+          <p>₹${item.price}</p>
+          <p>Condition: ${item.condition}</p>
+        </div>
+      `;
+    });
+
+    function openItem(id) {
+      window.location.href = "item_details.html?id=" + id;
+    }
+  </script>
+
+
+</body>
+</html>

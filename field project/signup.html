@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up | Campus Exchange</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="white">CAMPUS</span>
+      <span class="green">EXCHANGE</span>
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- SIGNUP SECTION -->
+  <section class="form-container">
+    <h1>
+      SIGN <span class="green">UP</span>
+    </h1>
+    <p class="subtitle">
+      Join the Campus Exchange community
+    </p>
+
+    <form class="auth-form" onsubmit="registerUser(event)">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email address" required>
+      <input type="tel" placeholder="Phone number" required>
+      <input type="password" placeholder="Create a secure password" required>
+
+      <button type="submit" class="primary-btn full-width">
+        CREATE ACCOUNT
+      </button>
+    </form>
+
+    <p class="switch-text">
+      Already have an account?
+      <a href="login.html">Sign In</a>
+    </p>
+  </section>
+
+  <!-- JS -->
+  <script>
+function registerUser(e) {
+  e.preventDefault();
+
+  const name = document.querySelector('input[type="text"]').value;
+  const email = document.querySelector('input[type="email"]').value;
+  const phone = document.querySelector('input[type="tel"]').value;
+  const password = document.querySelector('input[type="password"]').value;
+
+  fetch('http://127.0.0.1:5000/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.message) {
+      alert("Signup Successful 🎉");
+      window.location.href = "login.html";
+    } else {
+      alert(data.error);
+    }
+  })
+  .catch(err => {
+    alert("Server error");
+    console.log(err);
+  });
+}
+</script>
+
+</body>
+</html>

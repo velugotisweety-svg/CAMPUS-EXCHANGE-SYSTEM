@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Item Details | Campus Exchange</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ITEM DETAILS PAGE ONLY */
+    .details-section {
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .details-card {
+      background: #0f1411;
+      border: 1px solid #1c1c1c;
+      border-radius: 12px;
+      max-width: 420px;
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .details-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      background: #111;
+    }
+
+    .details-card h2 {
+      color: #00ff66;
+      margin-bottom: 10px;
+    }
+
+    .details-card p {
+      font-size: 14px;
+      color: #bfbfbf;
+      margin: 6px 0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 15px;
+      color: #00ff66;
+      text-decoration: none;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <span class="white">CAMPUS</span>
+      <span class="green">EXCHANGE</span>
+    </a>
+
+    <nav>
+      <a href="categories.html">Categories</a>
+     
+
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <!-- DETAILS SECTION -->
+  <section class="details-section">
+    <div class="details-card" id="box"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Campus Exchange. All rights reserved.</p>
+  </footer>
+
+  <!-- DATA -->
+  <script src="data.js"></script>
+
+  <script>
+    const id = Number(new URLSearchParams(window.location.search).get("id"));
+    const item = items.find(i => i.id === id);
+    const box = document.getElementById("box");
+
+    if (!item) {
+      box.innerHTML = `
+        <h2>Item Not Found</h2>
+        <a class="back-link" href="items.html">← Back to Items</a>
+      `;
+    } else {
+      box.innerHTML = `
+        <img src="${item.image}" 
+             onerror="this.src='https://via.placeholder.com/400x250?text=No+Image'">
+        <h2>${item.name}</h2>
+        <p><b>Price:</b> ₹${item.price}</p>
+        <p><b>Condition:</b> ${item.condition}</p>
+        <p><b>Seller:</b> ${item.seller}</p>
+        <p><b>Contact:</b> ${item.phone}</p>
+
+        <a class="back-link" href="items.html">← Back to Items</a>
+      `;
+    }
+  </script>
+
+</body>
+</html>
+
